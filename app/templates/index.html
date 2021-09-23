@@ -1,0 +1,330 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Нужно заполнять из админки -->
+    <meta name="description" content="{{ config.description_search }}" />
+    <meta name="keywords" content="{{ config.keywords }}" />
+    <meta name="format-detection" content="{{ config.format_detection }}" />
+    <!-- Нужно заполнять из админки -->
+
+    <!-- Заголовок -->
+    <title>Бильярдный клуб & бар Leon</title>
+
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Глобальные стили -->
+    <link href="{% static '/styles/reset.css' %}" rel="stylesheet">
+    <link href="{% static '/styles/grid.css' %}" rel="stylesheet">
+    <link href="{% static '/styles/common.css' %}" rel="stylesheet">
+
+    <!-- Стили шапки сайта -->
+    <link href="{% static '/styles/header.css' %}" rel="stylesheet">
+    <!-- Глобальные стили -->
+
+    <!-- Стили этой страницы -->
+    <link href="{% static '/styles/index.css' %}" rel="stylesheet">
+    <!-- Стили этой страницы -->
+</head>
+<body>
+    <!-- Header -->
+        <header class="header">
+            <div class="gridContainer flexContainer">
+                <a href="{% url 'index' %}">
+                    <img src="{% static '/images/logo.jpg' %}" alt="Логотип Leon" class="logo" />
+                </a>
+                <nav>
+                    <!-- Меню -->
+                    <ul class="menu">
+                        <!-- Это хардкод / не трогать -->
+                        <li>
+                            <a href="#club">О клубе</a>
+                        </li>
+                        <li>
+                            <a href="#gallery">Фотогалерея</a>
+                        </li>
+                        <li>
+                            <a href="#map">Контакты</a>
+                        </li>
+                        <!-- Это хардкод / не трогать -->
+
+                        <!-- А сюда нужны страницы -->
+                        <li>
+                            <a href="{% url 'menu' %}">Меню</a>
+                        </li>
+                        <!-- А сюда нужны страницы -->
+                    </ul>
+                </nav>
+                <div class="contactSide">
+                    <!-- Номер телефона -->
+                    <a href="tel:+78800080045">{{ config.phone }}</a>
+                    <!-- Номер телефона -->
+
+                </div>
+
+                <!-- Меню Мобильное тут -->
+                    <button class="openMobileMenu">
+                        <div class="menuLine"></div>
+                        <div class="menuLine"></div>
+                        <div class="menuLine"></div>
+                    </button>
+
+                <div class="menuMobilePopup">
+                    <div class="popupContainer">
+                        <nav>
+                            <ul class="menuMobile">
+                                <!-- Это хардкод / не трогать -->
+                                <li>
+                                    <a href="#club" class="hardLink">О клубе</a>
+                                </li>
+                                <li>
+                                    <a href="#gallery" class="hardLink">Фотогалерея</a>
+                                </li>
+                                <li>
+                                    <a href="#map" class="hardLink">Контакты</a>
+                                </li>
+                                <!-- Это хардкод / не трогать -->
+
+                                <!-- А сюда нужны страницы -->
+                                <li> <!--<li class="active">-->
+<!--                                Добавить активность для страницы если мы на ней-->
+                                    <a href="/menu">Меню</a>
+                                </li>
+                                <!-- А сюда нужны страницы -->
+                            </ul>
+                        </nav>
+                        <a href="tel:+78800080045" class="phoneMobileMenu">{{ config.phone }}</a>
+
+                    </div>
+                </div>
+                <!-- Меню Мобильное тут -->
+            </div>
+        </header>
+    <!-- Header -->
+
+    <!-- Первая секция баннера -->
+    <section class="sectionBanner">
+        <div class="splide splideBanner">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <!-- Сюда вставить картинки и текст с сервера -->
+                    {% for obj in slide %}
+                    <li class="splide__slide">
+                        <div class="slideBanner">
+                            <div class="gridContainer">
+                                <div class="sliderText">
+                                    <!-- Заголовок -->
+                                    <h4 class="commonTitle sliderTitle">{{ obj.title }}</h4>
+                                    <!-- Заголовок -->
+
+                                    <!-- Описание -->
+
+                                    <p class="commonDescription bannerDescription">{{ obj.description }}</p>
+
+                                    <!-- Описание -->
+                                </div>
+                            </div>
+
+                            <div class="overlay"></div>
+
+                            <!-- Путь до картинки -->
+                            <img src="{{ obj.image.url }}" class="bannerImage" />
+                            <!-- Путь до картинки -->
+                        </div>
+                    </li>
+                    {% endfor %}
+                    <!-- Сюда вставить картинки с сервера -->
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- Первая секция баннера -->
+
+    <!-- Вторая секция галлерея -->
+    <section class="gallery" id="gallery">
+        <div class="gridContainer">
+            <h4 class="commonTitle">{{ config.gallery_title }}</h4>
+
+            <div class="splide gallerySplide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <!-- Тут для декстопной версии -->
+                        {% for photo in photos %}
+                                {% if forloop.first or forloop.counter0|divisibleby:"6" %}
+                        <li class="splide__slide slideDesktop">
+                            <div class="photos">
+                                {% endif %}
+                                <!-- Тут будет (for) ОБЯЗАТЕЛЬНО назначить class tall каждому первому и четвертому элементу в массиве остальные wide -->
+                                <div class="galleryPhoto {% if forloop.first or forloop.counter0|divisibleby:'3' %}tall{% else %}wide{% endif %}">
+                                    <img src="{{ photo.image.url }}">
+                                </div>
+                                <!-- Тут будет (for) ОБЯЗАТЕЛЬНО!! назначить class tall каждому первому и четвертому элементу в массиве остальные wide -->
+                                {% if forloop.counter|divisibleby:"6" or forloop.last %}
+                            </div>
+                        </li>
+                                {% endif %}
+                        {% endfor %}
+                        <!-- Тут для декстопной версии -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="splide gallerySplideMobile">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <!-- Вообщем тут другой формат он нужен только для мобилы(продублировать тоже что и выше но в другом формате) -->
+                        {% for photo in photos %}
+                            {% if forloop.first or forloop.counter0|divisibleby:"5" %}
+                        <li class="splide__slide slideMobile">
+                            {% endif %}
+                            <img src="{{ photo.image.url }}">
+                            {% if forloop.counter|divisibleby:"5" or forloop.last %}
+                        </li>
+                            {% endif %}
+                        {% endfor %}
+                        <!-- Вообщем тут другой формат он нужен только для мобилы(продублировать тоже что и выше но в другом формате) -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="popupGallery">
+            <div class="closePopupGallery"></div>
+            <div class="splide gallerySplidePopup">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <!-- Тут будет (for) абсолютно для всех картинок из галереи(вообщем дупликат того что выше только формат другой) -->
+                        {% for photo in photos %}
+                            {% if forloop.first or forloop.counter0|divisibleby:"5" %}
+                        <li class="splide__slide">
+                            {% endif %}
+                            <img src="{{ photo.image.url }}">
+                            {% if forloop.counter|divisibleby:"5" or forloop.last %}
+                        </li>
+                            {% endif %}
+                        {% endfor %}
+                        <!-- Тут будет (for) абсолютно для всех картинок из галереи(вообщем дупликат того что выше только формат другой) -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Вторая секция галлерея -->
+
+    <!-- Третья секция о клубе -->
+    <section id="club" class="club">
+        <div class="gridContainer flexContainer">
+            <div class="leftAboutClub">
+                <h4 class="commonTitle clubTitle">{{ config.about_title }}</h4>
+                <p class="commonDescription clubDescription">
+                    {{ config.info }}
+                </p>
+            </div>
+            <img src="{{ config.image.url }}" alt="about club" class="aboutClubImage" />
+        </div>
+    </section>
+    <!-- Третья секция о клубе -->
+
+    <section class="map" id="map">
+        <div class="gridContainer">
+            <div class="mapContacts">
+                <h4 class="commonTitle mapTitle">{{ config.contacts_title }}</h4>
+                <!-- Номер телефона -->
+                <a href="tel:+78800080045" class="phoneMap">
+                    <img src="{% static '/images/phoneIcon.png' %}" class="phoneIcon" />
+                    {{ config.phone }}
+                </a>
+                <!-- Номер телефона -->
+
+                <!-- Почта -->
+                <a href="mailto:mailpochta@mail.ru" class="mailMap">
+                    <img src="{% static '/images/mailIcon.png' %}" class="mailIcon" />
+                    {{ config.email }}
+                </a>
+                <!-- Почта -->
+
+                <!-- Режим работы -->
+                <div class="workHours">
+                    <img src="{% static '/images/workHoursIcon.png' %}" class="workHoursIcon" />
+                    {{ config.schedule }}
+                </div>
+                <!-- Режим работы -->
+            </div>
+        </div>
+        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A870c5044d4e80b0560afa4f785c37e9160cb31537afbc1885e56acbecdf0c255&amp;source=constructor" width="100%" height="547" frameborder="0" class="mapIframe"></iframe>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="gridContainer flexContainer">
+            <a href="{% url 'index' %}">
+                <img src="{% static '/images/logo.jpg' %}" alt="Логотип Leon" class="logo" />
+            </a>
+            <nav>
+                <!-- Меню -->
+                <ul class="menu">
+                    <!-- Это хардкод / не трогать -->
+                    <li class="active">
+                        <a href="#club">О клубе</a>
+                    </li>
+                    <li>
+                        <a href="#gallery">Фотогалерея</a>
+                    </li>
+                    <li>
+                        <a href="#contacts">Контакты</a>
+                    </li>
+                    <!-- Это хардкод / не трогать -->
+
+                    <!-- А сюда нужны страницы -->
+                    <li>
+                        <a href="{% url 'menu' %}">Меню</a>
+                    </li>
+                    <!-- А сюда нужны страницы -->
+                </ul>
+            </nav>
+            <div class="contactSide">
+                <!-- Номер телефона -->
+                <a href="tel:+78800080045">{{ config.phone }}</a>
+                <!-- Номер телефона -->
+
+            </div>
+        </div>
+        <div class="copyright">
+            2021 Все права защищены
+        </div>
+    </footer>
+    <!-- Footer -->
+
+    <!-- Файлы Слайдера -->
+    <link href="{% static '/js/slider/css/splide.min.css' %}" rel="stylesheet">
+    <script src="{% static '/js/slider/js/splide.min.js' %}"></script>
+    <script>
+        document.addEventListener( 'DOMContentLoaded', function () {
+            new Splide( '.splideBanner' ).mount();
+            new Splide( '.gallerySplide' ).mount();
+            new Splide( '.gallerySplideMobile' , {
+                gap: 10
+            }).mount();
+        });
+    </script>
+    <link href="{% static '/styles/customStylesSlider.css' %}" rel="stylesheet">
+    <!-- Файлы Слайдера -->
+
+    <!-- Javascript -->
+    <script src="{% static '/js/index.js' %}"></script>
+    <script src="{% static '/js/mobileMenu.js' %}"></script<script src="./js/mobileMenu.js"></script
+    <!-- Javascript -->
+
+    <!-- Стили футера -->
+    <link href="{% static '/styles/footer.css' %}" rel="stylesheet">
+    <!-- Стили футера -->
+</body>
+</html>

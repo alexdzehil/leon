@@ -1,0 +1,284 @@
+.bannerImage {
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    top: 0;
+}
+
+.sliderText {
+    position: relative;
+    z-index: 2;
+    max-width: 550px;
+}
+
+.sliderTitle {
+    margin-bottom: 18px;
+}
+
+.slideBanner {
+    padding: 115px 0 117px;
+}
+
+.bannerDescription {
+    margin-bottom: 35px;
+}
+
+.overlay {
+    background: #112816;
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.gallery .commonTitle {
+    color: #000000;
+    margin-bottom: 38px;
+}
+
+.gallery {
+    margin-top: 52px;
+}
+
+.gallery .photos {
+    display: grid;
+    grid-gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: 200px;
+    grid-auto-flow: dense;
+}
+
+.galleryPhoto img {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.galleryPhoto {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.popupGallery {
+    display: none;
+    position: fixed;
+    width: 80%;
+    left: 50%;
+    top: 50%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+}
+
+.popupGalleryActive {
+    display: block;
+}
+
+.popupGalleryItem {
+    width: 100%;
+}
+
+.closePopupGallery {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.closePopupGallery:before, .closePopupGallery:after {
+    content: "";
+    position: absolute;
+    background: #fff;
+    height: 1px;
+    width: 100%;
+    top: 20px;
+}
+
+.closePopupGallery:before {
+    transform: rotate(46deg);
+}
+
+.closePopupGallery:after {
+    transform: rotate(-46deg);
+}
+
+.wide {
+    grid-column: span 1;
+}
+
+.tall {
+    grid-row: span 2;
+}
+
+.map {
+    margin-top: 60px;
+    position: relative;
+    padding-top: 35px;
+    height: 547px;
+    box-sizing: border-box;
+}
+
+.map .mapTitle {
+    color: #000000;
+}
+
+.mapIframe {
+    position: absolute;
+    height: inherit;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.club {
+    margin-top: 60px;
+}
+
+.aboutClubImage {
+    max-width: 570px;
+    width: 100%;
+    height: 100%;
+    max-height: 484px;
+    border-radius: 10px;
+    margin-left: 58px;
+}
+
+.leftAboutClub {
+    max-width: 542px;
+}
+
+.clubTitle, .clubDescription {
+    color: #000000;
+}
+
+.clubTitle {
+    margin-bottom: 30px;
+}
+
+.mapContacts {
+    width: 370px;
+    height: 333px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    z-index: 3;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 51px 94px 63px 45px;
+    box-sizing: border-box;
+}
+
+.mapContacts .mapTitle {
+    margin-bottom: 36px;
+}
+
+.phoneMap, .mailMap {
+    margin-bottom: 14px;
+}
+
+.phoneMap, .workHours, .mailMap {
+    display: flex;
+    align-items: center;
+}
+
+.phoneMap .phoneIcon, .workHours .workHoursIcon, .mailMap .mailIcon {
+    width: 27px;
+    height: 27px;
+    margin-right: 8px;
+}
+
+@media screen and (min-width: 768px) {
+    .gallerySplideMobile {
+        display: none!important;
+    }
+}
+
+@media screen and (max-width: 1125px) {
+    .aboutClubImage {
+        max-width: 50%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .slideBanner {
+        padding: 75px 0 114px;
+    }
+
+    .bannerDescription {
+        margin-bottom: 25px;
+    }
+
+    .sliderTitle {
+        margin-bottom: 14px;
+    }
+
+    .sliderText {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .bannerButton {
+        margin: 0 auto;
+    }
+
+    .club .flexContainer {
+        flex-direction: column;
+    }
+
+    .club .leftAboutClub {
+        margin-bottom: 27px;
+    }
+
+    .club .aboutClubImage {
+        margin-left: 0;
+    }
+
+    .club .clubTitle {
+        margin-bottom: 15px;
+    }
+
+    .map {
+        margin-top: 20px;
+        height: auto;
+    }
+
+    .gallerySplide {
+        display: none!important;
+    }
+
+    .slideMobile img {
+        width: 100%;
+    }
+
+    .mapIframe {
+        position: relative;
+    }
+
+    .mapContacts {
+        width: auto;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        height: auto;
+        margin-bottom: 25px;
+    }
+
+    .mapTitle {
+        margin-bottom: 22px;
+    }
+
+    .aboutClubImage {
+        max-width: 100%;
+    }
+}

@@ -1,0 +1,188 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Нужно заполнять из админки -->
+    <meta name="description" content="{{ config.description_search }}" />
+    <meta name="keywords" content="{{ config.keywords }}" />
+    <meta name="format-detection" content="{{ config.format_detection }}" />
+    <!-- Нужно заполнять из админки -->
+
+    <!-- Заголовок -->
+    <title>Бильярдный клуб & бар Leon - меню</title>
+
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Глобальные стили -->
+    <link href="{% static '/styles/reset.css' %}" rel="stylesheet">
+    <link href="{% static '/styles/grid.css' %}" rel="stylesheet">
+    <link href="{% static '/styles/common.css' %}" rel="stylesheet">
+
+    <!-- Стили шапки сайта -->
+    <link href="{% static '/styles/header.css' %}" rel="stylesheet">
+    <!-- Глобальные стили -->
+
+    <!-- Стили этой страницы -->
+    <link href="{% static '/styles/menu.css' %}" rel="stylesheet">
+    <!-- Стили этой страницы -->
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="gridContainer flexContainer">
+        <a href="{% url 'index' %}">
+            <img src="{% static '/images/logo.jpg' %}" alt="Логотип Leon" class="logo"/>
+        </a>
+        <nav>
+            <!-- Меню -->
+            <ul class="menu">
+                <!-- Это хардкод / не трогать -->
+                <li>
+                    <a href="{% url 'index' %}#club">О клубе</a>
+                </li>
+                <li>
+                    <a href="{% url 'index' %}#gallery">Фотогалерея</a>
+                </li>
+                <li>
+                    <a href="{% url 'index' %}#map">Контакты</a>
+                </li>
+                <!-- Это хардкод / не трогать -->
+
+                <!-- А сюда нужны страницы -->
+                <li>
+                    <a href="{% url 'menu' %}">Меню</a>
+                </li>
+                <!-- А сюда нужны страницы -->
+            </ul>
+        </nav>
+        <div class="contactSide">
+            <!-- Номер телефона -->
+            <a href="tel:+78800080045">{{ config.phone }}</a>
+            <!-- Номер телефона -->
+            
+        </div>
+
+        <!-- Меню Мобильное тут -->
+        <button class="openMobileMenu">
+            <div class="menuLine"></div>
+            <div class="menuLine"></div>
+            <div class="menuLine"></div>
+        </button>
+
+        <div class="menuMobilePopup">
+            <div class="popupContainer">
+                <nav>
+                    <ul class="menuMobile">
+                        <!-- Это хардкод / не трогать -->
+                        <li>
+                            <a href="index.html#club" class="hardLink">О клубе</a>
+                        </li>
+                        <li>
+                            <a href="index.html#gallery" class="hardLink">Фотогалерея</a>
+                        </li>
+                        <li>
+                            <a href="index.html#map" class="hardLink">Контакты</a>
+                        </li>
+                        <!-- Это хардкод / не трогать -->
+
+                        <!-- А сюда нужны страницы -->
+                        <li> <!--<li class="active">-->
+                            <!--                                Добавить активность для страницы если мы на ней-->
+                            <a href="menu.html">Меню</a>
+                        </li>
+                        <!-- А сюда нужны страницы -->
+                    </ul>
+                </nav>
+                <a href="tel:+78800080045" class="phoneMobileMenu">{{ config.phone }}</a>
+                
+            </div>
+        </div>
+        <!-- Меню Мобильное тут -->
+    </div>
+</header>
+<!-- Header -->
+
+<!-- Само Меню -->
+<section class="menu">
+    <div class="gridContainer">
+        <h1 class="commonTitle menuTitle">{{ menu.title }}</h1>
+        {% for menu in submenu %}
+        <div class="groupMenu">
+            <h4 class="commonTitle groupTitle">{{ menu.title }}</h4>
+            <div class="flexMenu">
+                {% for image in menu.images.all %}
+                <div class="menuItem">
+                    <img src="{{ image.image.url }}">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+</section>
+<!-- Меню -->
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="gridContainer flexContainer">
+        <a href="{% url 'index' %}">
+            <img src="{% static '/images/logo.jpg' %}" alt="Логотип Leon" class="logo"/>
+        </a>
+        <nav>
+            <!-- Меню -->
+            <ul class="menu">
+                <!-- Это хардкод / не трогать -->
+                <li class="active">
+                    <a href="{% url 'index' %}#club">О клубе</a>
+                </li>
+                <li>
+                    <a href="{% url 'index' %}#gallery">Фотогалерея</a>
+                </li>
+                <li>
+                    <a href="{% url 'index' %}#contacts">Контакты</a>
+                </li>
+                <!-- Это хардкод / не трогать -->
+
+                <!-- А сюда нужны страницы -->
+                <li>
+                    <a href="/menu">Меню</a>
+                </li>
+                <!-- А сюда нужны страницы -->
+            </ul>
+        </nav>
+        <div class="contactSide">
+            <!-- Номер телефона -->
+            <a href="tel:+78800080045">{{ config.phone }}</a>
+            <!-- Номер телефона -->
+            
+        </div>
+    </div>
+    <div class="copyright">
+        2021 Все права защищены
+    </div>
+</footer>
+<!-- Footer -->
+<!-- Файлы Слайдера -->
+<link href="{% static '/js/slider/css/splide.min.css' %}" rel="stylesheet">
+<script src="{% static '/js/slider/js/splide.min.js' %}"></script>
+<link href="{% static '/styles/customStylesSlider.css' %}" rel="stylesheet">
+<!-- Файлы Слайдера -->
+<!-- Javascript -->
+<script src="{% static '/js/menu.js' %}"></script>
+<script src="{% static '/js/mobileMenu.js' %}"></script>
+<!-- Javascript -->
+<!-- Стили галереи -->
+<link href="{% static '/styles/popupGallery.css' %}" rel="stylesheet">
+<!-- Стили галереи -->
+<!-- Стили футера -->
+<link href="{% static '/styles/footer.css' %}" rel="stylesheet">
+<!-- Стили футера -->
+</body>
+</html>

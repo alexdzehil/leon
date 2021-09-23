@@ -1,0 +1,46 @@
+.menu .commonTitle {
+    color: #222222;
+}
+
+.groupTitle {
+    margin-bottom: 35px;
+}
+
+.flexMenu {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.menuItem {
+    max-width: 212px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    cursor: zoom-in;
+}
+
+.menuItem:last-child {
+    margin-right: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+.menuTitle {
+    margin-top: 50px;
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+.groupMenu {
+    margin-bottom: 50px;
+}
+
+.groupMenu:last-child {
+    margin-bottom: 0;
+}
+
+.splide__slide {
+    display: flex;
+    justify-content: center;
+}
