@@ -17,7 +17,7 @@ def index(request):
 
 
 def menu(request):
-    meta_info = MetaInfo.objects.select_related('config').get()
+    meta_info = MetaInfo.objects.get()
     menu = Menu.objects.get()
     submenu = SubMenu.objects.select_related('config').all()
     image_menu = ImageMenu.objects.all()
