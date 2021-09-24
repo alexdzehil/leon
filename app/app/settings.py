@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # third party apps
     'nested_admin',
     'solo',
+    'sorl.thumbnail',
 
     # my apps
     'bar.apps.BarConfig',

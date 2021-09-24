@@ -1,23 +1,24 @@
 from django.contrib import admin
 
 from solo.admin import SingletonModelAdmin
+from sorl.thumbnail.admin import AdminImageMixin
 import nested_admin
 
 from .models import MainPageConfig, Slide, GalleryPhoto, Menu, SubMenu, ImageMenu
 
 
-class SlideInline(admin.StackedInline):
+class SlideInline(AdminImageMixin, admin.StackedInline):
     model = Slide
     extra = 0
 
 
-class GalleryPhotoInline(admin.TabularInline):
+class GalleryPhotoInline(AdminImageMixin, admin.TabularInline):
     model = GalleryPhoto
     extra = 0
 
 
 @admin.register(MainPageConfig)
-class MainPageConfigAdmin(SingletonModelAdmin):
+class MainPageConfigAdmin(AdminImageMixin, SingletonModelAdmin):
     fields = [
         'description_search',
         'keywords',
@@ -37,7 +38,7 @@ class MainPageConfigAdmin(SingletonModelAdmin):
     ]
 
 
-class ImageMenuInline(nested_admin.NestedStackedInline):
+class ImageMenuInline(AdminImageMixin, nested_admin.NestedStackedInline):
     model = ImageMenu
     extra = 0
 

@@ -1,5 +1,7 @@
 from django.db import models
+
 from solo.models import SingletonModel
+from sorl.thumbnail import ImageField
 
 
 class MainPageConfig(SingletonModel):
@@ -8,7 +10,7 @@ class MainPageConfig(SingletonModel):
 
     about_title = models.CharField(max_length=15, null=True, blank=True, verbose_name='Заголовок о клубе')
     info = models.TextField(null=True, blank=True, verbose_name='Описание клуба')
-    image = models.ImageField(null=True, blank=True, verbose_name='Фото о клубе')
+    image = ImageField(null=True, blank=True, upload_to='uploaded_images', verbose_name='Фото о клубе')
 
     contacts_title = models.CharField(max_length=15, verbose_name='Заголовок контакты')
     phone = models.CharField(max_length=20, null=True, blank=True, verbose_name='Телефон')
@@ -31,7 +33,7 @@ class Slide(models.Model):
     config = models.ForeignKey(MainPageConfig, null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=255, null=True, blank=True, verbose_name='Заголовок сайдбара')
     description = models.TextField(null=True, blank=True, verbose_name='Описание')
-    image = models.ImageField(null=True, blank=True, verbose_name='Фото в сайдбар')
+    image = ImageField(null=True, blank=True, verbose_name='Фото в сайдбар')
 
     def __str__(self):
         return 'Сайдбар'
@@ -43,7 +45,7 @@ class Slide(models.Model):
 
 class GalleryPhoto(models.Model):
     config = models.ForeignKey(MainPageConfig, null=True, blank=True, on_delete=models.CASCADE)
-    image = models.ImageField(null=True, blank=True, verbose_name='Галлерея')
+    image = ImageField(null=True, blank=True, verbose_name='Галлерея')
 
     def __str__(self):
         return 'Фотогаллерея'
@@ -78,7 +80,7 @@ class SubMenu(models.Model):
 
 class ImageMenu(models.Model):
     owner = models.ForeignKey(SubMenu, null=True, blank=True, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(null=True, blank=True, verbose_name='Фото меню')
+    image = ImageField(null=True, blank=True, verbose_name='Фото меню')
 
     def __str__(self):
         return 'Фото меню'
