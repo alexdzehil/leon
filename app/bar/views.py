@@ -1,15 +1,15 @@
 from django.shortcuts import render
 
-from .models import MainPageConfig, Slide, GalleryPhoto, Menu, SubMenu, ImageMenu
+from .models import MainPageConfig, Slide, GalleryPhoto, Menu, SubMenu, ImageMenu, MetaInfo
 
 
 def index(request):
-    config = MainPageConfig.objects.get()
+    meta_info = MetaInfo.objects.select_related('config').get()
     slide = Slide.objects.all()
     photos = GalleryPhoto.objects.all()
 
     context = {
-        'config': config,
+        'meta': meta_info,
         'slide': slide,
         'photos': photos,
     }
@@ -17,15 +17,15 @@ def index(request):
 
 
 def menu(request):
-    config = MainPageConfig.objects.get()
+    meta_info = MetaInfo.objects.select_related('config').get()
     menu = Menu.objects.get()
-    submenu = SubMenu.objects.all()
+    submenu = SubMenu.objects.select_related('config').all()
     image_menu = ImageMenu.objects.all()
 
     context = {
         'menu': menu,
         'submenu': submenu,
         'image_menu': image_menu,
-        'config': config
+        'meta': meta_info,
     }
     return render(request, 'menu.html', context)

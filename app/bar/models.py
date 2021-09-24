@@ -17,16 +17,26 @@ class MainPageConfig(SingletonModel):
     email = models.EmailField(max_length=200, null=True, blank=True, verbose_name='Электронная почта')
     schedule = models.CharField(max_length=200, null=True, blank=True, verbose_name='Режим работы')
 
-    description_search = models.CharField(max_length=255, null=True, blank=True, verbose_name='Описание для поисковой выдачи')
-    keywords = models.CharField(max_length=255, null=True, blank=True, verbose_name='Ключевые слова для поисковой выдачи')
-    format_detection = models.CharField(max_length=255, null=True, blank=True, verbose_name='Формат для поисковой выдачи')
-
     def __str__(self):
         return 'Конфигурация сайта'
 
     class Meta:
         verbose_name = 'Конфигурация сайта'
         verbose_name_plural = 'Конфигурация сайта'
+
+
+class MetaInfo(SingletonModel):
+    config = models.ForeignKey(MainPageConfig, null=True, blank=True, on_delete=models.CASCADE)
+    description_search = models.CharField(max_length=255, null=True, blank=True, verbose_name='Описание для поисковой выдачи')
+    keywords = models.CharField(max_length=255, null=True, blank=True, verbose_name='Ключевые слова для поисковой выдачи')
+    format_detection = models.CharField(max_length=255, null=True, blank=True, verbose_name='Формат для поисковой выдачи')
+
+    def __str__(self):
+        return 'Информация для поисковых систем'
+
+    class Meta:
+        verbose_name = 'Информация для поисковых систем'
+        verbose_name_plural = 'Информация для поисковых систем'
 
 
 class Slide(models.Model):
