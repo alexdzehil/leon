@@ -4,7 +4,8 @@ from .models import MainPageConfig, Slide, GalleryPhoto, Menu, SubMenu, ImageMen
 
 
 def index(request):
-    meta_info = MetaInfo.objects.select_related('config').get()
+    meta_info = MetaInfo.objects.get()
+    config = MainPageConfig.objects.get()
     slide = Slide.objects.all()
     photos = GalleryPhoto.objects.all()
 
@@ -12,12 +13,14 @@ def index(request):
         'meta': meta_info,
         'slide': slide,
         'photos': photos,
+        'config': config
     }
     return render(request, 'index.html', context)
 
 
 def menu(request):
     meta_info = MetaInfo.objects.get()
+    config = MainPageConfig.objects.get()
     menu = Menu.objects.get()
     submenu = SubMenu.objects.select_related('config').all()
     image_menu = ImageMenu.objects.all()
@@ -27,5 +30,6 @@ def menu(request):
         'submenu': submenu,
         'image_menu': image_menu,
         'meta': meta_info,
+        'config': config
     }
     return render(request, 'menu.html', context)
