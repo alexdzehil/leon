@@ -160,7 +160,7 @@
               <div class="photos">
             {% endif %}
           <!-- Тут будет (for) ОБЯЗАТЕЛЬНО назначить class tall каждому первому и четвертому элементу в массиве остальные wide -->
-          <div class="galleryPhoto {% if forloop.first or forloop.counter0|divisibleby:'3' %}tall{% else %}wide{% endif %}" data-id="{{ forloop.counter }}">>
+          <div class="galleryPhoto {% if forloop.first or forloop.counter0|divisibleby:'3' %}tall{% else %}wide{% endif %}" data-id="{{ forloop.counter|add: forloop.parentloop.counter }}">>
             <img src="{{ photo.image.url }}">
           </div>
           <!-- Тут будет (for) ОБЯЗАТЕЛЬНО!! назначить class tall каждому первому и четвертому элементу в массиве остальные wide -->
@@ -179,13 +179,9 @@
         <ul class="splide__list">
           <!-- Вообщем тут другой формат он нужен только для мобилы(продублировать тоже что и выше но в другом формате) -->
           {% for photo in photos %}
-            {% if forloop.first or forloop.counter0|divisibleby:"5" %}
-              <li class="splide__slide slideMobile">
-            {% endif %}
-          <img src="{{ photo.image.url }}">
-          {% if forloop.counter|divisibleby:"5" or forloop.last %}
+            <li class="splide__slide slideMobile">
+              <img src="{{ photo.image.url }}">
             </li>
-          {% endif %}
           {% endfor %}
           <!-- Вообщем тут другой формат он нужен только для мобилы(продублировать тоже что и выше но в другом формате) -->
         </ul>
