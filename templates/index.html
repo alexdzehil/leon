@@ -160,7 +160,7 @@
               <div class="photos">
             {% endif %}
           <!-- Тут будет (for) ОБЯЗАТЕЛЬНО назначить class tall каждому первому и четвертому элементу в массиве остальные wide -->
-          <div class="galleryPhoto {% if forloop.first or forloop.counter0|divisibleby:'3' %}tall{% else %}wide{% endif %}" data-id="{{ forloop.counter|add: forloop.parentloop.counter }}">>
+          <div class="galleryPhoto {% if forloop.first or forloop.counter0|divisibleby:'3' %}tall{% else %}wide{% endif %}" data-id="{{ forloop.counter }}">>
             <img src="{{ photo.image.url }}">
           </div>
           <!-- Тут будет (for) ОБЯЗАТЕЛЬНО!! назначить class tall каждому первому и четвертому элементу в массиве остальные wide -->
