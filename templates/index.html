@@ -200,13 +200,9 @@
         <ul class="splide__list">
           <!-- Тут будет (for) абсолютно для всех картинок из галереи(вообщем дупликат того что выше только формат другой) -->
           {% for photo in photos %}
-            {% if forloop.first or forloop.counter0|divisibleby:"5" %}
-              <li class="splide__slide">
-            {% endif %}
-          <img src="{{ photo.image.url }}">
-          {% if forloop.counter|divisibleby:"5" or forloop.last %}
+            <li class="splide__slide">
+              <img src="{{ photo.image.url }}">
             </li>
-          {% endif %}
           {% endfor %}
           <!-- Тут будет (for) абсолютно для всех картинок из галереи(вообщем дупликат того что выше только формат другой) -->
         </ul>
