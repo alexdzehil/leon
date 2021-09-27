@@ -1,4 +1,7 @@
 {% load static %}
+{% load get_global_counter %}
+{% load update_variable %}
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -112,39 +115,25 @@
 <section class="menu">
   <div class="gridContainer">
     <h1 class="commonTitle menuTitle">{{ menu.title }}</h1>
-    {% for menu in submenu %}
-      <div class="groupMenu">
-        <h4 class="commonTitle groupTitle">{{ menu.title }}</h4>
-        <div class="flexMenu">
-          {% for image in menu.images.all %}
-            <div class="menuItem" data-id="{{ forloop.counter }}">
-              <img src="{{ image.image.url }}">
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-</section>
-
-<section class="menu">
-  <div class="gridContainer">
-    <h1 class="commonTitle menuTitle">{{ menu.title }}</h1>
 
     <!-- Сюды вставляем -->
-    {% for menu in submenu %}
-      <div class="groupMenu">
-        <h4 class="commonTitle groupTitle">{{ menu.title }}</h4>
-        <div class="flexMenu">
-          {% for image in menu.images.all %}
-            <div class="menuItem" data-id="{{ forloop.counter }}">
-              <img src="{{ image.image.url }}" alt="photo {{ forloop.counter }}">
-            </div>
-          {% endfor %}
+    {% with items=0 %}
+      {% for menu in submenu %}
+        <div class="groupMenu">
+          <h4 class="commonTitle groupTitle">{{ menu.title }}</h4>
+          <div class="flexMenu">
+            {% for image in menu.images.all %}
+              <div class="menuItem" data-id="{% get_global_counter inner=forloop.counter outer=forloop.parentloop.counter0 items=items %}">
+                <img src="{{ image.image.url }}" alt="photo {{ forloop.counter }}">
+              </div>
+              {% if foorloop.last %}
+                {% update_variable items|add:foorloop.counter as items %}
+              {% endif %}
+            {% endfor %}
+          </div>
         </div>
-      </div>
-    {% endfor %}
-
+      {% endfor %}
+    {% endwith %}
 
     <div class="popupGallery">
       <div class="closePopupGallery"></div>
