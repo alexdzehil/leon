@@ -42,7 +42,7 @@
           <h4 class="commonTitle groupTitle">{{ menu.title }}</h4>
           <div class="flexMenu">
             {% for image in menu.images.all %}
-              <div class="menuItem" data-id="{% get_global_counter inner=forloop.counter outer=forloop.parentloop.counter0 items=items %}">
+              <div class="menuItem" data-id="{% get_global_counter inner=forloop.counter0 outer=forloop.parentloop.counter im_cou=menu.images.count items=items %}">
                 <img src="{{ image.image.url }}" alt="photo {{ forloop.counter }}">
               </div>
               {% if foorloop.last %}
