@@ -1,0 +1,33 @@
+{% load static %}
+
+<footer class="footer">
+  <div class="gridContainer flexContainer">
+    <a href="{% url 'index' %}">
+      <img src="{% static '/images/logo.jpg' %}" alt="Логотип Leon" class="logo"/>
+    </a>
+    <nav>
+      <ul class="menu">
+        <li class="active">
+          <a href="{% url 'index' %}#club">О клубе</a>
+        </li>
+        <li>
+          <a href="{% url 'index' %}#gallery">Фотогалерея</a>
+        </li>
+        <li>
+          <a href="{% url 'index' %}#contacts">Контакты</a>
+        </li>
+
+        <li>
+          <a href="/menu">Меню</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="contactSide">
+      <a href="tel:{{ config.phone }}">{{ config.phone }}</a>
+
+    </div>
+  </div>
+  <div class="copyright">
+    2021 Все права защищены
+  </div>
+</footer>
