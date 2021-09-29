@@ -16,10 +16,12 @@ def get_global_counter(inner, outer, items, im_cou):
     # print(items)
     # print('Искомый айдишник', count - (inner + outer))
     global i
-    if i <= count:
+    print(i)
+    if i < count:
         i += 1
         print('Искомое число', i)
     else:
+        i = 1
         print('Все')
     print('='*80)
     return i
