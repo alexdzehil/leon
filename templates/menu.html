@@ -1,6 +1,4 @@
 {% load static %}
-{% load get_global_counter %}
-{% load update_variable %}
 
 <!doctype html>
 <html lang="en">
@@ -42,12 +40,9 @@
           <h4 class="commonTitle groupTitle">{{ menu.title }}</h4>
           <div class="flexMenu">
             {% for image in menu.images.all %}
-              <div class="menuItem" data-id="{% get_global_counter inner=forloop.counter0 outer=forloop.parentloop.counter im_cou=menu.images.count items=items %}">
+              <div class="menuItem" data-id="{{ image.pk }}">
                 <img src="{{ image.image.url }}" alt="photo {{ forloop.counter }}">
               </div>
-              {% if foorloop.last %}
-                {% update_variable items|add:foorloop.counter as items %}
-              {% endif %}
             {% endfor %}
           </div>
         </div>
