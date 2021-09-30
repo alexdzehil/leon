@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import MainPageConfig, Slide, GalleryPhoto, Menu, SubMenu, ImageMenu, MetaInfo
+from .models import GalleryPhoto, ImageMenu, MainPageConfig, Menu, MetaInfo, Slide, SubMenu
 
 
 def index(request):

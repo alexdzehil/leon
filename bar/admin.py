@@ -1,10 +1,10 @@
-from django.contrib import admin
-
+import nested_admin
 from solo.admin import SingletonModelAdmin
 from sorl.thumbnail.admin import AdminImageMixin
-import nested_admin
 
-from .models import MainPageConfig, Slide, GalleryPhoto, Menu, SubMenu, ImageMenu, MetaInfo
+from django.contrib import admin
+
+from .models import GalleryPhoto, ImageMenu, MainPageConfig, Menu, MetaInfo, Slide, SubMenu
 
 
 class SlideInline(AdminImageMixin, admin.StackedInline):
