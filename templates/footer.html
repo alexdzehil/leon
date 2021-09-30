@@ -18,7 +18,7 @@
         </li>
 
         <li>
-          <a href="/menu">Меню</a>
+          <a href="{% url 'menu' %}">Меню</a>
         </li>
       </ul>
     </nav>
@@ -28,6 +28,6 @@
     </div>
   </div>
   <div class="copyright">
-    2021 Все права защищены
+    {% now 'Y' %} Все права защищены
   </div>
 </footer>
