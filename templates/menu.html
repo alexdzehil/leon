@@ -41,7 +41,7 @@
           <div class="flexMenu">
             {% for image in menu.images.all %}
               <div class="menuItem" data-id="{{ image.pk }}">
-                <img src="{{ image.image.url }}" alt="photo {{ forloop.counter }}">
+                <img src="{{ image.image.url }}" alt="photo {{ forloop.acounter }}">
               </div>
             {% endfor %}
           </div>
