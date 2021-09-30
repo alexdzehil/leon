@@ -1,21 +1,37 @@
-from django.db import models
-
 from solo.models import SingletonModel
 from sorl.thumbnail import ImageField
 
+from django.db import models
+
 
 class MainPageConfig(SingletonModel):
-    slide_title = models.CharField(max_length=255, null=True, blank=True, verbose_name='Заголовок сайдбара')
-    gallery_title = models.CharField(max_length=50, null=True, blank=True, verbose_name='Заголовок галлереи')
+    slide_title = models.CharField('Заголовок сайдбара',
+                                   max_length=255,
+                                   blank=True, null=True)
+    gallery_title = models.CharField('Заголовок галлереи',
+                                     max_length=50,
+                                     blank=True, null=True)
 
-    about_title = models.CharField(max_length=15, null=True, blank=True, verbose_name='Заголовок о клубе')
-    info = models.TextField(null=True, blank=True, verbose_name='Описание клуба')
-    image = ImageField(null=True, blank=True, upload_to='uploaded_images', verbose_name='Фото о клубе')
+    about_title = models.CharField('Заголовок о клубе',
+                                   max_length=15,
+                                   blank=True, null=True)
+    info = models.TextField('Описание клуба',
+                            blank=True, null=True)
+    image = ImageField('Фото о клубе',
+                       blank=True, null=True,
+                       upload_to='uploaded_images')
 
-    contacts_title = models.CharField(max_length=15, verbose_name='Заголовок контакты')
-    phone = models.CharField(max_length=20, null=True, blank=True, verbose_name='Телефон')
-    email = models.EmailField(max_length=200, null=True, blank=True, verbose_name='Электронная почта')
-    schedule = models.CharField(max_length=200, null=True, blank=True, verbose_name='Режим работы')
+    contacts_title = models.CharField('Заголовок контакты',
+                                      max_length=15)
+    phone = models.CharField('Телефон',
+                             max_length=20,
+                             blank=True, null=True)
+    email = models.EmailField('Электронная почта',
+                              max_length=200,
+                              blank=True, null=True)
+    schedule = models.CharField('Режим работы',
+                                max_length=200,
+                                blank=True, null=True)
 
     def __str__(self):
         return 'Конфигурация сайта'
@@ -26,10 +42,18 @@ class MainPageConfig(SingletonModel):
 
 
 class MetaInfo(SingletonModel):
-    config = models.ForeignKey(MainPageConfig, null=True, blank=True, on_delete=models.CASCADE)
-    description_search = models.CharField(max_length=255, null=True, blank=True, verbose_name='Описание для поисковой выдачи')
-    keywords = models.CharField(max_length=255, null=True, blank=True, verbose_name='Ключевые слова для поисковой выдачи')
-    format_detection = models.CharField(max_length=255, null=True, blank=True, verbose_name='Формат для поисковой выдачи')
+    config = models.ForeignKey(MainPageConfig,
+                               blank=True, null=True,
+                               on_delete=models.CASCADE)
+    description_search = models.CharField('Описание для поисковой выдачи',
+                                          max_length=255,
+                                          blank=True, null=True)
+    keywords = models.CharField('Ключевые слова для поисковой выдачи',
+                                max_length=255,
+                                blank=True, null=True)
+    format_detection = models.CharField('Формат для поисковой выдачи',
+                                        max_length=255,
+                                        blank=True, null=True)
 
     def __str__(self):
         return 'Информация для поисковых систем'
@@ -40,10 +64,16 @@ class MetaInfo(SingletonModel):
 
 
 class Slide(models.Model):
-    config = models.ForeignKey(MainPageConfig, null=True, blank=True, on_delete=models.CASCADE)
-    title = models.CharField(max_length=255, null=True, blank=True, verbose_name='Заголовок сайдбара')
-    description = models.TextField(null=True, blank=True, verbose_name='Описание')
-    image = ImageField(null=True, blank=True, verbose_name='Фото в сайдбар')
+    config = models.ForeignKey(MainPageConfig,
+                               blank=True, null=True,
+                               on_delete=models.CASCADE)
+    title = models.CharField('Заголовок сайдбара',
+                             max_length=255,
+                             blank=True, null=True)
+    description = models.TextField('Описание',
+                                   blank=True, null=True)
+    image = ImageField('Фото в сайдбар',
+                       blank=True, null=True)
 
     def __str__(self):
         return 'Сайдбар'
@@ -54,8 +84,11 @@ class Slide(models.Model):
 
 
 class GalleryPhoto(models.Model):
-    config = models.ForeignKey(MainPageConfig, null=True, blank=True, on_delete=models.CASCADE)
-    image = ImageField(null=True, blank=True, verbose_name='Галлерея')
+    config = models.ForeignKey(MainPageConfig,
+                               blank=True, null=True,
+                               on_delete=models.CASCADE)
+    image = ImageField('Галлерея',
+                       blank=True,null=True)
 
     def __str__(self):
         return 'Фотогаллерея'
@@ -66,7 +99,9 @@ class GalleryPhoto(models.Model):
 
 
 class Menu(SingletonModel):
-    title = models.CharField(max_length=50, null=True, blank=True, verbose_name='Заголовок меню')
+    title = models.CharField('Заголовок меню',
+                             max_length=50,
+                             blank=True, null=True)
 
     def __str__(self):
         return 'Меню'
@@ -77,8 +112,12 @@ class Menu(SingletonModel):
 
 
 class SubMenu(models.Model):
-    config = models.ForeignKey(Menu, null=True, blank=True, on_delete=models.CASCADE)
-    title = models.CharField(max_length=50, null=True, blank=True, verbose_name='Подзаголовок меню')
+    config = models.ForeignKey(Menu,
+                               blank=True, null=True,
+                               on_delete=models.CASCADE)
+    title = models.CharField('Подзаголовок меню',
+                             max_length=50,
+                             blank=True, null=True)
 
     def __str__(self):
         return 'Подменю'
@@ -89,8 +128,12 @@ class SubMenu(models.Model):
 
 
 class ImageMenu(models.Model):
-    owner = models.ForeignKey(SubMenu, null=True, blank=True, on_delete=models.CASCADE, related_name='images')
-    image = ImageField(null=True, blank=True, verbose_name='Фото меню')
+    owner = models.ForeignKey(SubMenu,
+                              blank=True, null=True,
+                              on_delete=models.CASCADE,
+                              related_name='images')
+    image = ImageField('Фото меню',
+                       blank=True, null=True)
 
     def __str__(self):
         return 'Фото меню'

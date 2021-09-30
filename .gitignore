@@ -335,5 +335,6 @@ fabric.properties
 # Ignore all local history of files
 .history
 .ionide
+.isort.cfg
 
 # End of https://www.toptal.com/developers/gitignore/api/python,django,pycharm,visualstudiocode
