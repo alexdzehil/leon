@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from solo.models import SingletonModel
 from sorl.thumbnail import ImageField
 
@@ -70,7 +71,7 @@ class Slide(models.Model):
     title = models.CharField('Заголовок сайдбара',
                              max_length=255,
                              blank=True, null=True)
-    description = models.TextField('Описание',
+    description = RichTextField('Описание',
                                    blank=True, null=True)
     image = ImageField('Фото в сайдбар',
                        blank=True, null=True)

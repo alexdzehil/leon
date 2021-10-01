@@ -4,7 +4,15 @@ from sorl.thumbnail.admin import AdminImageMixin
 
 from django.contrib import admin
 
-from .models import GalleryPhoto, ImageMenu, MainPageConfig, Menu, MetaInfo, Slide, SubMenu
+from .models import (
+    GalleryPhoto,
+    ImageMenu,
+    MainPageConfig,
+    Menu,
+    MetaInfo,
+    Slide,
+    SubMenu,
+)
 
 
 class SlideInline(AdminImageMixin, admin.StackedInline):

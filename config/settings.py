@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'nested_admin',
     'solo',
     'sorl.thumbnail',
+    'ckeditor',
 
     # my apps
     'bar.apps.BarConfig',
