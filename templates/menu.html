@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<link href="{% static '/styles/menu.css' %}" rel="stylesheet">
+
+{% block title %}
+Бильярдный клуб & бар Leon - меню
+{% endblock title %}
+
+
+
+{% block content %}
+<section class="menu">
+  <div class="gridContainer">
+    <h1 class="commonTitle menuTitle">{{ menu.title }}</h1>
+
+      {% for menu in submenu %}
+        <div class="groupMenu">
+          <h4 class="commonTitle groupTitle">{{ menu.title }}</h4>
+          <div class="flexMenu">
+            {% for image in menu.images.all %}
+              <div class="menuItem" data-id="{{ image.pk }}">
+                <img src="{{ image.image.url }}" alt="photo {{ forloop.acounter }}">
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+
+    <div class="popupGallery">
+      <div class="closePopupGallery"></div>
+      <div class="splide gallerySplidePopup">
+        <div class="splide__track">
+          <ul class="splide__list">
+            {% for menu in submenu %}
+              {% for image in menu.images.all %}
+                <li class="splide__slide">
+                  <img src="{{ image.image.url }}" alt="photo {{ forloop.counter }}" class="popupGalleryItem">
+                </li>
+              {% endfor %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<link href="{% static '/styles/menu.css' %}" rel="stylesheet">
+
+<link href="{% static '/js/slider/css/splide.min.css' %}" rel="stylesheet">
+<script src="{% static '/js/slider/js/splide.min.js' %}"></script>
+
+<script src="{% static '/js/menu.js' %}"></script>
+
+{% endblock content %}
